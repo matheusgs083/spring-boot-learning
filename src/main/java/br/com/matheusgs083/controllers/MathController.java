@@ -1,6 +1,7 @@
 package br.com.matheusgs083.controllers;
 
 import br.com.matheusgs083.exception.UnsupportedMathOperationException;
+import br.com.matheusgs083.exception.UnsupportedZeroDivisionException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +30,7 @@ public class MathController {
     @RequestMapping("/division/{num1}/{num2}")
     public Double division(@PathVariable("num1") String num1, @PathVariable("num2") String num2) throws Exception{
         if (mathService.isNumeric(num1) || mathService.isNumeric(num2)) throw new UnsupportedMathOperationException("Please set a numeric value!");
-        if (mathService.convertToDouble(num2) == 0) throw  new  UnsupportedMathOperationException("Division by zero is impossible!");
+        if (mathService.convertToDouble(num2) == 0) throw  new UnsupportedZeroDivisionException("Division by zero is impossible!");
         return mathService.convertToDouble(num1) / mathService.convertToDouble(num2);
     }
 
